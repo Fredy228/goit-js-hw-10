@@ -1,2 +1,0 @@
-class t{fetchCountries(){fetch(`https://restcountries.com/v3.1/name/${this.name}?fields=name,capital,languages,population,flags`).then((t=>t.json())).then((t=>{for(const e of t)console.log(e)}))}constructor(t){this.name=t}}const e={inputText:document.querySelector("#search-box"),countryListHTML:document.querySelector(".country-list"),countryInfoHTML:document.querySelector(".country-info")};e.inputText.addEventListener("input",(function(){const n=e.inputText.value;""!==e.inputText.value&&new t(n).fetchCountries()}));
-//# sourceMappingURL=index.c91ba21d.js.map
