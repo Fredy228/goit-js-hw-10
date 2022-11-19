@@ -1,5 +1,6 @@
 import './css/styles.css';
 import CoutnryApiServices from './fetch-countries';
+
 const refs = {
   inputText: document.querySelector('#search-box'),
   countryListHTML: document.querySelector('.country-list'),
@@ -7,13 +8,18 @@ const refs = {
 };
 
 const DEBOUNCE_DELAY = 300;
+const debounce = require('lodash.debounce');
+const coutnryApiServices = new CoutnryApiServices();
 
-refs.inputText.addEventListener('input', searchCountries);
+refs.inputText.addEventListener('input', debounce(searchCountries, 300));
 
 function searchCountries() {
   const nameCountries = refs.inputText.value;
 
   if (refs.inputText.value !== '') {
-    new CoutnryApiServices(nameCountries).fetchCountries();
+    coutnryApiServices.nameSearch = nameCountries;
+    coutnryApiServices
+      .fetchCountries()
+      .then(arrayCountries => console.log(arrayCountries));
   }
 }

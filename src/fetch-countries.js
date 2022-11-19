@@ -1,17 +1,26 @@
 export default class CoutnryApiServices {
-  constructor(name) {
-    this.name = name;
+  constructor() {
+    this.searchQuery = '';
   }
   fetchCountries() {
     const homeUrl = 'https://restcountries.com/v3.1/';
     const settingsRequest = 'name,capital,languages,population,flags';
 
-    fetch(`${homeUrl}name/${this.name}?fields=${settingsRequest}`)
+    return fetch(`${homeUrl}name/${this.searchQuery}?fields=${settingsRequest}`)
       .then(response => response.json())
-      .then(arrayCoutnries => {
-        for (const objCountry of arrayCoutnries) {
-          console.log(objCountry);
-        }
+      .then(arrayCountries => {
+        return arrayCountries;
+      })
+      .catch(error => {
+        console.log('Ошибка');
       });
+  }
+
+  get nameSearch() {
+    return this.searchQuery;
+  }
+
+  set nameSearch(newName) {
+    this.searchQuery = newName;
   }
 }
