@@ -13,17 +13,15 @@ export default class CoutnryApiServices {
         if (response.ok) {
           return response.json();
         }
+        Notiflix.Notify.failure('Oops, there is no country with that name');
       })
       .then(arrayCountries => {
-        if (arrayCountries.length < 10) {
-          return arrayCountries;
+        if (arrayCountries.length > 10) {
+          Notiflix.Notify.info(
+            'Too many matches found. Please enter a more specific name.'
+          );
         }
-        Notiflix.Notify.info(
-          'Too many matches found. Please enter a more specific name.'
-        );
-      })
-      .catch(error => {
-        Notiflix.Notify.failure('Oops, there is no country with that name');
+        return arrayCountries;
       });
   }
 

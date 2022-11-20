@@ -23,10 +23,13 @@ function searchCountries() {
 
   if (refs.inputText.value !== '') {
     coutnryApiServices.nameSearch = nameInput;
-    coutnryApiServices.fetchCountries().then(arrayCountries => {
-      markupCountriesList(arrayCountries);
-      markupCountryBlock(arrayCountries);
-    });
+    coutnryApiServices
+      .fetchCountries()
+      .then(arrayCountries => {
+        markupCountriesList(arrayCountries);
+        markupCountryBlock(arrayCountries);
+      })
+      .catch(error => {});
   }
 }
 
